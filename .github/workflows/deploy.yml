@@ -26,8 +26,8 @@ jobs:
       uses: aws-actions/aws-cloudformation-github-deploy@v1
       with:
         name: website-stack
-        template: aws-cloudformation/stack2.yml
+        template: aws-cloudformation/stack.yml
         no-fail-on-empty-changeset: 1
     
-    - name: Deploy lambda function
+    - name: Update lambda function code
       run: aws lambda update-function-code --function-name send-email-function --s3-bucket jays-apps --s3-key payloads/lambda-send-email-function/lambda-send-email-function.zip

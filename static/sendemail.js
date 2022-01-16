@@ -11,7 +11,7 @@ function invokeAWSAPI(e) {
      
      $.ajax({
       type: "POST",
-      url : "https://ty84a3bwz9.execute-api.us-east-1.amazonaws.com/prod/",
+      url : "https://1ra44r5h4m.execute-api.us-east-1.amazonaws.com/Prod/hello",
       dataType: "json",
       crossDomain: "true",
       contentType: "application/json; charset=utf-8",
