@@ -23,7 +23,7 @@ jobs:
       run: |
         cd aws-cloudformation/lambda-send-email-function; zip lambda-send-email-function.zip lambda_function.py; cd ../..
         aws s3 cp aws-cloudformation/lambda-send-email-function/lambda-send-email-function.zip s3://jays-apps/payloads/lambda-send-email-function/
-        aws lambda update-function-code --function-name send-email-function --zip-file s3://jays-apps/payloads/lambda-send-email-function/lambda-send-email-function.zip
+        aws lambda update-function-code --function-name send-email-function --s3-bucket jays-apps --s3-key payloads/lambda-send-email-function/lambda-send-email-function.zip
     
     - name: Deploy to AWS CloudFormation
       uses: aws-actions/aws-cloudformation-github-deploy@v1
