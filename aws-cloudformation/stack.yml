@@ -83,7 +83,7 @@ Resources:
     Properties:
       Code:
         S3Bucket: jays-apps
-        S3Key: payload/lambda-send-email-function/lambda-send-email-function.zip
+        S3Key: payloads/lambda-send-email-function/lambda-send-email-function.zip
       Description: Lambda function to send email from website
       FunctionName: !Ref lambdaFunctionName
       Handler: lambda_function.lambda_handler
