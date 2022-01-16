@@ -77,7 +77,7 @@ Resources:
       RestApiId: !Ref apiGateway
       HttpMethod: !Ref apiGatewayHTTPMethod
       Integration:
-        Credentials: !GetAtt lambdaIAMRole.arn
+        Credentials: !Sub ${lambdaIAMRole.Arn}
         IntegrationHttpMethod: POST
         Type: AWS
         Uri: !Sub
