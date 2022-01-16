@@ -20,7 +20,9 @@ jobs:
       run: aws s3 sync static/ s3://jaygovindsahu.com/
     
     - name: Deploy lambda function to S3
-      run: aws s3 sync aws-cloudformation/lambda-send-email-function/ s3://jays-apps/payload/lambda-send-email-function/
+      run: |
+        zip lambda-send-email-function.zip aws-cloudformation/lambda-send-email-function/lambda_function.py
+        aws s3 cp lambda-send-email-function.zip s3://jays-apps/payload/lambda-send-email-function/
     
     - name: Deploy to AWS CloudFormation
       uses: aws-actions/aws-cloudformation-github-deploy@v1
