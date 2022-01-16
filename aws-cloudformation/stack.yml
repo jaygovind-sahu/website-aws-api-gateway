@@ -68,7 +68,9 @@ Resources:
 
   apiGatewayRootMethod:
     Type: AWS::ApiGateway::Method
-    DependsOn: lambdaFunction
+    DependsOn: 
+      - lambdaIAMRole
+      - lambdaFunction
     Properties:
       AuthorizationType: NONE
       ResourceId: !GetAtt apiGateway.RootResourceId
