@@ -19,13 +19,13 @@ jobs:
     - name: Deploy website to S3
       run: aws s3 sync static/ s3://jaygovindsahu.com/
     
-    - name: Deploy lambda function to S3
+    - name: Deploy lambda function
       run: |
         cd aws-cloudformation/lambda-send-email-function; zip lambda-send-email-function.zip lambda_function.py; cd ../..
         aws s3 cp aws-cloudformation/lambda-send-email-function/lambda-send-email-function.zip s3://jays-apps/payloads/lambda-send-email-function/
         aws lambda update-function-code --function-name send-email-function --s3-bucket jays-apps --s3-key payloads/lambda-send-email-function/lambda-send-email-function.zip
     
-    - name: Deploy to AWS CloudFormation
+    - name: Deploy AWS CloudFormation
       uses: aws-actions/aws-cloudformation-github-deploy@v1
       with:
         name: website-stack
