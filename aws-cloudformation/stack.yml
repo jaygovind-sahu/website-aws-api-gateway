@@ -43,6 +43,8 @@ Resources:
                 Resource:
                   - !Sub arn:aws:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/${lambdaFunctionName}:*
           PolicyName: lambda
+      ManagedPolicyArns:
+        - arn:aws:iam::${AWS::AccountId}:policy/AllowSendEmailPolicy
 
   lambdaFunction:
     Type: AWS::Lambda::Function
