@@ -16,8 +16,11 @@ jobs:
         aws-secret-access-key: ${{ secrets. AWS_SECRET_ACCESS_KEY }}
         aws-region: us-east-1
 
-    - name: Deploy to S3
+    - name: Deploy website to S3
       run: aws s3 sync static/ s3://jaygovindsahu.com/
+    
+    - name: Deploy lambda function to S3
+      run: aws s3 sync aws-cloudformation/lambda-send-email-function/ s3://jays-apps/payload/lambda-send-email-function/
     
     - name: Deploy to AWS CloudFormation
       uses: aws-actions/aws-cloudformation-github-deploy@v1
