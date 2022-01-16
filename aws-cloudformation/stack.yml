@@ -9,9 +9,6 @@ Parameters:
     Type: String
     AllowedPattern: "[a-z0-9]+"
     Default: call
-  apiGatewayHTTPMethod:
-    Type: String
-    Default: POST
   lambdaFunctionName:
     Type: String
     AllowedPattern: "[a-zA-Z0-9]+[a-zA-Z0-9-]+[a-zA-Z0-9]+"
@@ -76,10 +73,10 @@ Resources:
       AuthorizationType: NONE
       ResourceId: !GetAtt apiGateway.RootResourceId
       RestApiId: !Ref apiGateway
-      HttpMethod: !Ref apiGatewayHTTPMethod
+      HttpMethod: POST
       Integration:
-        IntegrationHttpMethod: POST
         Type: AWS
+        IntegrationHttpMethod: POST
         Uri: !Sub
           - arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${lambdaArn}/invocations
           - lambdaArn: !GetAtt lambdaFunction.Arn
@@ -90,15 +87,15 @@ Resources:
             method.response.header.Access-Control-Allow-Methods: "'POST,OPTIONS'"
             method.response.header.Access-Control-Allow-Origin: "'*'"
           ResponseTemplates:
-            application/json: ''
+            application/json: $input.json('$')
+      RequestParameters:
+        method.request.querystring.name: false
       MethodResponses:
-      - StatusCode: 200
-        ResponseModels:
-          application/json: 'Empty'
-        ResponseParameters:
+      - ResponseParameters:
           method.response.header.Access-Control-Allow-Headers: true
           method.response.header.Access-Control-Allow-Methods: true
           method.response.header.Access-Control-Allow-Origin: true
+        StatusCode: 200
   
   apiGatewayOptionsMethod:
     Type: AWS::ApiGateway::Method
@@ -108,6 +105,7 @@ Resources:
       RestApiId: !Ref apiGateway
       HttpMethod: OPTIONS
       Integration:
+        Type: MOCK
         IntegrationResponses:
         - StatusCode: 200
           ResponseParameters:
@@ -116,18 +114,17 @@ Resources:
             method.response.header.Access-Control-Allow-Origin: "'*'"
           ResponseTemplates:
             application/json: ''
-        PassthroughBehavior: WHEN_NO_MATCH
+        PassthroughBehavior: NEVER
         RequestTemplates:
           application/json: '{"statusCode": 200}'
-        Type: MOCK
       MethodResponses:
-      - StatusCode: 200
-        ResponseModels:
-          application/json: 'Empty'
+      - ResponseModels:
+          application/json: Empty
         ResponseParameters:
           method.response.header.Access-Control-Allow-Headers: true
           method.response.header.Access-Control-Allow-Methods: true
           method.response.header.Access-Control-Allow-Origin: true
+        StatusCode: 200
 
   apiGatewayDeployment:
     Type: AWS::ApiGateway::Deployment
