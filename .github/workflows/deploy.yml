@@ -30,3 +30,4 @@ jobs:
         name: website-stack
         template: aws-cloudformation/stack.yml
         parameter-overrides: "apiGatewayName=sendEmailApi,apiGatewayStageName=prod"
+        no-fail-on-empty-changeset: 1
