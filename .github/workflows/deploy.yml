@@ -1,4 +1,4 @@
-ame: Package and Deploy
+name: Package and Deploy
 
 on: push
 
