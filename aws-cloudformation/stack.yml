@@ -93,7 +93,7 @@ Resources:
       - apiGatewayAccount
     Type: 'AWS::ApiGateway::Stage'
     Properties:
-      DeploymentId: !Ref apiDeployment
+      DeploymentId: !Ref apiGatewayDeployment
       MethodSettings:
         - DataTraceEnabled: true
           HttpMethod: '*'
