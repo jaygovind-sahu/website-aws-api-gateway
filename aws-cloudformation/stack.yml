@@ -41,6 +41,7 @@ Resources:
           PolicyName: lambda
       ManagedPolicyArns:
         - !Sub arn:aws:iam::${AWS::AccountId}:policy/AllowSendEmailPolicy
+        - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
 
   lambdaFunction:
     Type: AWS::Lambda::Function
