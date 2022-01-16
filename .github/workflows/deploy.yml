@@ -29,6 +29,5 @@ jobs:
       uses: aws-actions/aws-cloudformation-github-deploy@v1
       with:
         name: website-stack
-        template: aws-cloudformation/stack.yml
-        parameter-overrides: "apiGatewayName=sendEmailApi,apiGatewayStageName=prod"
+        template: aws-cloudformation/stack2.yml
         no-fail-on-empty-changeset: 1
