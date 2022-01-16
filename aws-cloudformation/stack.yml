@@ -88,22 +88,6 @@ Resources:
         - apiGatewayCloudWatchLogsRole
         - Arn
   
-  apiStage:
-    DependsOn:
-      - apiGatewayAccount
-    Type: 'AWS::ApiGateway::Stage'
-    Properties:
-      DeploymentId: !Ref apiGatewayDeployment
-      MethodSettings:
-        - DataTraceEnabled: true
-          HttpMethod: '*'
-          LoggingLevel: INFO
-          ResourcePath: /*
-      RestApiId: !Ref apiGateway
-      StageName: !Ref apiGatewayStageName
-      Variables:
-        Tom: Maslen-v4
-  
   apiGatewayDeployment:
     Type: AWS::ApiGateway::Deployment
     DependsOn:
